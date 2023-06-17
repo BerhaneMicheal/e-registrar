@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Of Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+    <nav th:replace="fragment/navbar :: nav"></nav>
+    <form>
+        <input type="search" name="searchParam" th:value="${searchParam}">
+        <button type="submit">Search</button>
+    </form>
+    <a href="/students/register">Register</a>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Student Number</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>CGPA</th>
+                <th>Enrollment Date</th>
+                <th>Is International</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student, counter : ${students}">
+                <td th:text="${counter.count}"></td>
+                <td th:text="${student.studentNumber}"></td>
+                <td th:text="${student.FirstName}" />
+                <td th:text="${student.MiddleName}" />
+                <td th:text="${student.LastName}" />
+                <td th:text="${student.cgpa}" />
+                <td th:text="${student.enrollmentDate}" />
+                <td th:text="${student.isInternational}" />
+                <td>
+                    <a th:href="@{/students/{id}/edit(id=${student.studentId})}">Edit</a>
+                    <a th:href="@{/students/{id}/delete(id=${student.studentId})}">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
